@@ -1,19 +1,9 @@
-CREATE DATABASE dr-todo;
-
-CREATE TABLE users( id SERIAL PRIMARY KEY, name VARCHAR(40), email TEXT);
-INSERT INTO users(name, email) VALUES ( 'damian', 'damian@gmail.com');
+CREATE DATABASE <tale-name>;
 
 create type status_t as enum('pending', 'progress', 'finished');
-# create table for relationshup with users
-CREATE TABLE tasks( id SERIAL PRIMARY KEY, title VARCHAR(40), completed BOOLEAN, status status_t, userid: number, FOREIGN KEY (userid) REFERENCES users (id));
-INSERT INTO tasks (userid, title, completed, status) VALUES (1,'Create API', false, 'progress');
 
-#create table no relationshup
+#create table no relationship
 CREATE TABLE tasks( id SERIAL PRIMARY KEY, title VARCHAR(40), status status_t);
 
-
 // isert data
-
-{"ok":true,
-"data":[
-    {"id":41,"title":"ekmasfasf","status":"pending","userid":1},{"id":40,"title":"asdfsadf","status":"pending","userid":1},{"id":30,"title":"Conquer the world","completed":false,"status":"progress","userid":1},{"id":29,"title":"Another one!","completed":false,"status":"progress","userid":1},{"id":8,"title":"ab voluptatum amet voluptas","completed":false,"status":"progress","userid":1}],"totalRows":"11"}1
+INSERT INTO tasks ( title, status) VALUES ('Create API', 'progress'), ('ekmasfasf', 'pending'),('asdfsadf', 'pending'),('Conquer the world', 'progress'),('Another one!', 'progress'),('ab voluptatum amet voluptas', 'progress'),('ipsa repellendus fugit nisi', 'pending'),('vero rerum temporibus dolor', 'progress'),('quo adipisci enim quam ut ab', 'finished'),('et porro tempora', 'pending'),('my updated task', 'finished'),('my updated task', 'pending');

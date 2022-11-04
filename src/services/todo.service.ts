@@ -1,5 +1,4 @@
 import { Todo } from '../models/todo.model';
-import { User } from '../models/user.model';
 import data from './todos.json';
 
 const enum Status {
@@ -7,16 +6,8 @@ const enum Status {
     Progress = 'progress',
     Finished = 'finished'
 }
-interface task {
-    userId: number;
-    id: number;
-    title: string;
-    completed: boolean;
-    status: Status | string;
-    User?: User;
-}
 
-const items: Partial<Todo>[] = data;
+const items: Todo[] = data;
 export const getEntries = () => items;
 
 export const addEntry = () => null;
