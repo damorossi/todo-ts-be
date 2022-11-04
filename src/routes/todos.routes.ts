@@ -1,6 +1,5 @@
 // ROUTES TODO
 import express from 'express';
-
 import { check } from 'express-validator';
 import * as crudActions from '../controllers/todo.controller';
 import validate from '../helpers/validate';
@@ -13,7 +12,6 @@ router.post('/', [
     check('status', 'This field is Mandatory').not().isEmpty(),
     validate
 ], crudActions.createTodo);
-
 
 router.put('/:id', [
     check('title', 'This field is mandatory').not().isEmpty(),

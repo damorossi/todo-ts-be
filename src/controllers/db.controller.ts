@@ -1,13 +1,14 @@
 // DATA DB CONNECTION
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 import { Pool } from "pg"
-
 const dbConn = new Pool({
-    host: 'localhost',
-    user: 'postgres',
-    password: 'dr-2022',
-    database: 'postgres',
-    port: 5432
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    database: process.env.DB_DATABASE,
+    port: +(process.env.DB_PORT!)
 });
 
 export { dbConn }
