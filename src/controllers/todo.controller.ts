@@ -1,9 +1,9 @@
-import { Request, response } from 'express';
+import { request, response } from 'express';
 import { dbConn } from './db.controller';
 
-const fetchTodos = async (req: Request, res = response) => {
+const fetchTodos = async (req = request, res = response) => {
     const PAGE_LIMIT = 5;
-    const pageOfsset = req.query.offset || 0;
+    const pageOfsset = req.query?.offset || 0;
 
     try {
         const data = await dbConn.query(`select * from tasks ORDER BY id DESC LIMIT ${PAGE_LIMIT} OFFSET ${pageOfsset} ;`);
@@ -21,7 +21,7 @@ const fetchTodos = async (req: Request, res = response) => {
     }
 };
 
-const createTodo = async (req: any, res = response) => {
+const createTodo = async (req = request, res = response) => {
     try {
         const { title, status } = req.body;
         let insertQuery = `INSERT INTO tasks  (title, status) VALUES ('${title}',  '${status}')`;
@@ -37,7 +37,6 @@ const createTodo = async (req: any, res = response) => {
         });
 
     } catch (e) {
-        console.log('error', e);
         return res.status(400).json({
             ok: false,
             msg: e
@@ -45,10 +44,10 @@ const createTodo = async (req: any, res = response) => {
     }
 }
 
-const updateTodo = async (req: any, res = response) => {
-    const taskId = req.params.id;
+const updateTodo = async (req = request, res = response) => {
+    const taskId = req.body.id;
     try {
-        const dataExists = await validateExists(taskId);
+        const dataExists = await validateExists(+taskId);
 
         if (!dataExists) {
             return res.status(404).json({
@@ -80,10 +79,10 @@ const updateTodo = async (req: any, res = response) => {
     }
 }
 
-const deleteTodo = async (req: any, res = response) => {
+const deleteTodo = async (req = request, res = response) => {
     const taskId = req.params.id;
     try {
-        const dataExists = await validateExists(taskId);
+        const dataExists = await validateExists(+taskId);
 
         if (!dataExists) {
             return res.status(404).json({
